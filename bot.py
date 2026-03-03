@@ -1,3 +1,5 @@
+import typing
+
 import discord
 from discord.ext import commands
 from config import TOKEN
@@ -6,6 +8,13 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.group(hidden=True)
+async def secret(ctx: commands.Context):
+    """What is this "secret" you speak of?"""
+    if ctx.invoked_subcommand is None:
+        await ctx.send('Shh!', delete_after=5)
+
 
 @bot.event
 async def on_ready():
@@ -24,5 +33,6 @@ async def heh(ctx, count_heh = 5):
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     await ctx.send(left + right)
+
 
 bot.run(TOKEN)
