@@ -1,4 +1,3 @@
-import typing
 
 import discord
 from discord.ext import commands
@@ -9,13 +8,6 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix='$', intents=intents)
 
-@bot.group(hidden=True)
-async def secret(ctx: commands.Context):
-    """What is this "secret" you speak of?"""
-    if ctx.invoked_subcommand is None:
-        await ctx.send('Shh!', delete_after=5)
-
-
 @bot.event
 async def on_ready():
     print(f'{bot.user} olarak giriş yaptık')
@@ -23,6 +15,12 @@ async def on_ready():
 @bot.command()
 async def hello(ctx):
     await ctx.send(f'Merhaba! Ben {bot.user}, bir Discord sohbet botuyum!')
+
+@bot.group(hidden=True)
+async def secret(ctx: commands.Context):
+    """What is this "secret" you speak of?"""
+    if ctx.invoked_subcommand is None:
+        await ctx.send('Shh!', delete_after=5)
 
 @bot.command()
 async def heh(ctx, count_heh = 5):
@@ -36,3 +34,4 @@ async def add(ctx, left: int, right: int):
 
 
 bot.run(TOKEN)
+
