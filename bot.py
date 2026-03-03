@@ -16,7 +16,7 @@ async def on_ready():
 async def hello(ctx):
     await ctx.send(f'Merhaba! Ben {bot.user}, bir Discord sohbet botuyum!')
 
-@bot.group(hidden=True)
+@bot.command(hidden=True)
 async def secret(ctx: commands.Context):
     """What is this "secret" you speak of?"""
     if ctx.invoked_subcommand is None:
@@ -34,4 +34,5 @@ async def add(ctx, left: int, right: int):
 
 
 bot.run(TOKEN)
+
 
